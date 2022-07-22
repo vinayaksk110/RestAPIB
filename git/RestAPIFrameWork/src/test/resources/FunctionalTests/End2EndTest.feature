@@ -1,6 +1,6 @@
-Feature: End to end testing for  ToolsQA's Bookstore API 
+Feature: This is end to end test for ToolsQA bookstore
 
-Background: User generates token for Authorization
+Background: User generates token for Authorisation
 
 Given I am an authorized user
 
