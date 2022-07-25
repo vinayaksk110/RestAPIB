@@ -6,8 +6,11 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "src/test/resources/FunctionalTests")
+@CucumberOptions(features = "src/test/resources/FunctionalTests", 
+				glue = {"StepDefinitions"}, 
+				monochrome = true
+//				strict = true
+				)
 
 public class TestRunner {
 
