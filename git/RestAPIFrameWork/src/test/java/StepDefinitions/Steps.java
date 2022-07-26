@@ -1,5 +1,8 @@
 package StepDefinitions;
 
+import java.util.List;
+import java.util.Map;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,31 +31,39 @@ public class Steps {
 	    response = httpRequest.body("{ \"userName\":\"" + USERNAME + "\", \"password\":\"" + PASSWORD + "\"}").post("/Account/v1/GenerateToken");
 	    String jsonString = response.asString();
 	    token = JsonPath.from(jsonString).get("token");
+	    System.out.println("token of the user is :"+token);
 	}
 	@Given("A list of books are available")
 	public void a_list_of_books_are_available() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    RestAssured.baseURI = BASE_URL;
+	    RequestSpecification httpRequest = RestAssured.given();
+	    response = httpRequest.get("/BookStore/v1/Books");
+	    jsonString = response.asString();
+	    List<Map<String,String>> books = JsonPath.from(jsonString).get("books");
+	    
+	    bookId= books.get(0).get("isbn");
+	    System.out.println(bookId);
+	    
 	}
 	@When("I add a book to my reading list")
 	public void i_add_a_book_to_my_reading_list() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+//	    throw new io.cucumber.java.PendingException();
 	}
 	@Then("the book is added")
 	public void the_book_is_added() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+//	    throw new io.cucumber.java.PendingException();
 	}
 	@When("I remove a book from my reading list")
 	public void i_remove_a_book_from_my_reading_list() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+//	    throw new io.cucumber.java.PendingException();
 	}
 	@Then("the book is removed")
 	public void the_book_is_removed() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+//	    throw new io.cucumber.java.PendingException();
 	}
 
 }
