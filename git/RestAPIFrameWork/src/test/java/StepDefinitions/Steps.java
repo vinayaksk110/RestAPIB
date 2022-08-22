@@ -3,6 +3,8 @@ package StepDefinitions;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,15 +42,19 @@ public class Steps {
 	    response = httpRequest.get("/BookStore/v1/Books");
 	    jsonString = response.asString();
 	    List<Map<String,String>> books = JsonPath.from(jsonString).get("books");
-	    
+	    Assert.assertTrue(books.size()>0);
+	    System.out.println("Books size is : "+books.size());
 	    bookId= books.get(0).get("isbn");
-	    System.out.println(bookId);
+	    System.out.println("Book id of the 1st book is "+bookId);
 	    
 	}
 	@When("I add a book to my reading list")
 	public void i_add_a_book_to_my_reading_list() {
-	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
+	    RestAssured.baseURI = BASE_URL;
+	    RequestSpecification httpRequest = RestAssured.given();
+	    response = httpRequest.get("/BookStore/v1/Books");
+	    jsonString = response.asString();
+	    
 	}
 	@Then("the book is added")
 	public void the_book_is_added() {
